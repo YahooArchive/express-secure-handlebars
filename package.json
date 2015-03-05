@@ -1,0 +1,60 @@
+{
+  "name": "express-secure-handlebars",
+  "version": "1.0.0",
+  "licenses": [
+    {
+      "type": "BSD",
+      "url": "https://github.com/yahoo/express-secure-handlebars/blob/master/LICENSE"
+    }
+  ],
+  "author": "Nera Liu",
+  "contributors": [
+    "Nera Liu <neraliu@yahoo-inc.com>",
+    "Adonis Fung <adon@yahoo-inc.com>",
+    "Albert Yu <albertyu@yahoo-inc.com>"
+  ],
+  "description": "Secure Express/Handlebars with Context Parser",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:yahoo/express-secure-handlebars.git"
+  },
+  "keywords": [
+    "context",
+    "parser",
+    "html5",
+    "handlebars",
+    "express"
+  ],
+  "scripts": {
+    "hint": "grunt jshint",
+    "build": "npm install; grunt",
+    "clean": "grunt clean",
+    "test": "grunt test"
+  },
+  "dependencies": {
+    "util": "^0.10.*",
+    "debug": "^2.1.*",
+    "context-parser-handlebars": "^1.*",
+    "express-handlebars": "^1.2.*",
+    "xss-filters": "^1.*"
+  },
+  "devDependencies": {
+    "express": "^4.12.*",
+    "supertest": "^0.15.0",
+    "expect.js": "^0.3.1",
+    "grunt": "^0.4.5",
+    "grunt-cli": "0.1.*",
+    "grunt-contrib-clean": "^0.6.0",
+    "grunt-contrib-jshint": "^0.11.0",
+    "grunt-mocha-istanbul": "^2.3.0"
+  },
+  "main": "./src/express-secure-handlebars.js",
+  "bugs": {
+    "url": "https://github.com/yahoo/express-secure-handlebars/issues"
+  },
+  "homepage": "https://github.com/yahoo/express-secure-handlebars",
+  "directories": {
+    "test": "tests"
+  },
+  "license": "BSD"
+}
