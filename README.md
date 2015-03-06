@@ -77,6 +77,9 @@ Apply your changes to files in [src/](./src), and then run the tests.
 $ npm test
 ```
 
+### Build
+[![Build Status](https://travis-ci.org/yahoo/express-secure-handlebars.svg?branch=master)](https://travis-ci.org/yahoo/express-secure-handlebars)
+
 ## License
 
 This software is free to use under the Yahoo Inc. BSD license.
