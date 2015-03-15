@@ -52,15 +52,17 @@ function ExpressSecureHandlebars(config) {
 util.inherits(ExpressSecureHandlebars, expressHandlebars);
 
 ExpressSecureHandlebars.prototype.compileTemplate = function (template, options) {
-
     if (!options || !options.precompiled) {
         try {
             var parser = new ContextParserHandlebars();
             parser.contextualize(template);
             template = parser.getOutput();
         } catch (err) {
-            console.log("[WARNING] ExpressSecureHandlebars: " + err);
-            console.log("[WARNING] ExpressSecureHandlebars: fall back to original express-handlebars");
+            console.log('=====================');
+            console.log("[WARNING] ExpressSecureHandlebars: falling back to the original express-handlebars");
+            console.log(err);
+            console.log(template);
+            console.log('=====================');
         }
     } else {
         console.log("[WARNING] ExpressSecureHandlebars: ContextParserHandlebars cannot handle precompiled template!");
