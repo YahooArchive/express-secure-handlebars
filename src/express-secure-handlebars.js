@@ -57,7 +57,7 @@ ExpressSecureHandlebars.prototype.compileTemplate = function (template, options)
         try {
             var parser = new ContextParserHandlebars();
             parser.contextualize(template);
-            template = parser.getBuffer().join('');
+            template = parser.getOutput();
         } catch (err) {
             console.log("[WARNING] ExpressSecureHandlebars: " + err);
             console.log("[WARNING] ExpressSecureHandlebars: fall back to original express-handlebars");
