@@ -23,6 +23,8 @@ Authors: Nera Liu <neraliu@yahoo-inc.com>
             expect(typeof expressHandlebars.ExpressHandlebars).to.be.equal('function');
             expect(expressHandlebars.create).to.be.ok();
             expect(expressHandlebars.ExpressHandlebars).to.be.ok();
+            expect(expressHandlebars.create().compileTemplate).to.be.ok();
+
 
             // console.log(expressSecureHandlebars);
             expect(typeof expressSecureHandlebars).to.be.equal('function');
@@ -30,6 +32,7 @@ Authors: Nera Liu <neraliu@yahoo-inc.com>
             expect(typeof expressSecureHandlebars.ExpressHandlebars).to.be.equal('function');
             expect(expressSecureHandlebars.create).to.be.ok();
             expect(expressSecureHandlebars.ExpressHandlebars).to.be.ok();
+            expect(expressSecureHandlebars.create().compileTemplate).to.be.ok();
         });
 
         it("Express Secure Handlebars new instance test", function() {
@@ -44,6 +47,27 @@ Authors: Nera Liu <neraliu@yahoo-inc.com>
             expect(expHbs.handlebars).to.be.ok();
             var expSecureHbs = expressSecureHandlebars.create();
             expect(expSecureHbs.handlebars).to.be.ok();
+        });
+
+        var data = {url: 'javascript:alert(1)'};
+        it("Express Secure Handlebars fallback on error test", function() {
+            var template = '{{#if url}}<a href="{{url}}"{{else}}<a href="{{url}}">closed</a>{{/if}}';
+            var expSecureHbs = expressSecureHandlebars.create();
+            var t1 = expSecureHbs.compileTemplate(template);
+
+            var expHbs = expressHandlebars.create();
+            var t2 = expHbs.compileTemplate(template);
+            expect(t1(data)).to.be.equal(t2(data));
+        });
+
+       it("Express Secure Handlebars compileTemplate test", function() {
+            var template = '<a href="{{url}}">closed</a>';
+            var expSecureHbs = expressSecureHandlebars.create();
+            var t1 = expSecureHbs.compileTemplate(template);
+
+            var expHbs = expressHandlebars.create();
+            var t2 = expHbs.compileTemplate(template);
+            expect(t1(data)).not.to.be.equal(t2(data));
         });
     });
 

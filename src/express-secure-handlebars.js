@@ -60,7 +60,7 @@ ExpressSecureHandlebars.prototype.compileTemplate = function (template, options)
         } catch (err) {
             console.log('=====================');
             console.log("[WARNING] ExpressSecureHandlebars: falling back to the original express-handlebars");
-            Object.keys(err).forEach(function(k){console.log(k.toUpperCase() + ':\n' + err[k])});
+            Object.keys(err).forEach(function(k){console.log(k.toUpperCase() + ':\n' + err[k]);});
             console.log("TEMPLATE:\n" + template);
             console.log('=====================');
         }
