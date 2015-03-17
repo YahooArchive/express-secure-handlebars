@@ -1,6 +1,6 @@
 {
   "name": "express-secure-handlebars",
-  "version": "1.0.4",
+  "version": "1.1.0",
   "licenses": [
     {
       "type": "BSD",
@@ -32,10 +32,10 @@
     "test": "grunt test"
   },
   "dependencies": {
-    "util": "^0.10.*",
-    "debug": "^2.1.*",
     "context-parser-handlebars": "^1.0.5",
     "express-handlebars": "^1.2.*",
+    "handlebars": "^3.0.0",
+    "util": "^0.10.*",
     "xss-filters": "^1.*"
   },
   "devDependencies": {
