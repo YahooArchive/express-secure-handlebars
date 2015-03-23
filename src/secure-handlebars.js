@@ -7,12 +7,9 @@ Authors: Nera Liu <neraliu@yahoo-inc.com>
          Albert Yu <albertyu@yahoo-inc.com>
          Adonis Fung <adon@yahoo-inc.com>
 */
-/*jshint -W030 */
 var Handlebars = require('handlebars'),
     ContextParserHandlebars = require("context-parser-handlebars"),
     xssFilters = require('xss-filters');
-
-
 
 function preprocess(template) {
     try {
@@ -71,7 +68,6 @@ function override(h) {
     });
     return h;
 }
-
 
 if (module && module.exports) {
     module.exports = override(Handlebars.create());
