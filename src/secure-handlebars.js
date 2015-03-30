@@ -15,8 +15,7 @@ function preprocess(template) {
     try {
         if (template) {
             var parser = new ContextParserHandlebars({printCharEnable: false});
-            parser.contextualize(template);
-            return parser.getOutput();
+            return parser.analyzeContext(template);
         }
     } catch (err) {
         console.log('=====================');
