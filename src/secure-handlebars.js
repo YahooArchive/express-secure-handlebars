@@ -34,11 +34,13 @@ function override(h) {
 
     // override precompile function to preprocess the template first
     h.precompile = function (template, options) {
+        options = options || {};
         return pc.call(this, preprocess(template), options);
     };
 
     // override compile function to preprocess the template first
     h.compile = function (template, options) {
+        options = options || {};
         return c.call(this, preprocess(template), options);
     };
 
