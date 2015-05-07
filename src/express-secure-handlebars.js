@@ -10,7 +10,7 @@ Authors: Nera Liu <neraliu@yahoo-inc.com>
 /*jshint -W030 */
 var util = require("util"),
     expressHandlebars = require('express-handlebars').ExpressHandlebars,
-    secureHandlebars = require('./secure-handlebars');
+    secureHandlebars = require('secure-handlebars');
 
 function ExpressSecureHandlebars(config) {
 
