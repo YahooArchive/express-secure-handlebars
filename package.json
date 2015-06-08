@@ -32,10 +32,10 @@
     "test": "grunt test"
   },
   "dependencies": {
-    "express-handlebars": "^2.0.0",
-    "handlebars": "^3.0.0",
-    "secure-handlebars": "^0.1.0",
-    "xss-filters": "^1.*"
+    "express-handlebars": "^2.0.1",
+    "handlebars": "^3.0.3",
+    "secure-handlebars": "^1.0.0",
+    "xss-filters": "^1.2.0"
   },
   "devDependencies": {
     "express": "^4.12.*",
