@@ -10,12 +10,12 @@ notifications:
   on_failure: always
 after_success:
 - test $(cat $TRAVIS_BUILD_DIR/package.json | grep version | awk '{print $2}' | sed
-  's/"//g' | sed 's/,//g') = $TRAVIS_TAG && export VALID_VERSION=true
+  's/"//g' | sed 's/,//g' | awk '{print "v"$1}' ) = $TRAVIS_TAG && export VALID_VERSION=true
 deploy:
   provider: npm
   email: neraliu@yahoo-inc.com
   api_key:
-    secure: zfmnqdz4MU4Rw+CiSHBqmRXldJAe5UJw3tyTk91Wbzpa74Mgjn+zTFzmkI5rcdhu5553fuSrERXUTDaXQRj8ZcG+L1HJ0YbJYptha7zXfOLJjRLthRk4EF0U9O2AjlVAEfLrMVGtf6ORxzFZUrjYIfzlkKXHTc+5cxJD4eRiT6U=
+    secure: LlhF8dO3Plt023CjeQRumw9ZgBNsE2KWanHrRY/SnMoFxWgcVYEbzX3Ze5CtoRvtm8CH+3z71L11BaL52GN0qm+0zX93h4JXTYETloEzX2pdJpiBXATzEKcscLC5bfsarh2I/UlkSPQP2b+mkAi3RJu/rjF4CBjbpwka90aF1k0=
   on:
     condition: $VALID_VERSION = true
     tags: true
