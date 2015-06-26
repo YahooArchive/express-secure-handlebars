@@ -2,22 +2,25 @@ Express with Secure Handlebars
 -------
 [![npm version][npm-badge]][npm]
 [![dependency status][dep-badge]][dep-status]
+[![Build Status](https://travis-ci.org/yahoo/express-secure-handlebars.svg?branch=master)](https://travis-ci.org/yahoo/express-secure-handlebars)
 
 [npm]: https://www.npmjs.org/package/express-secure-handlebars
 [npm-badge]: https://img.shields.io/npm/v/express-secure-handlebars.svg?style=flat-square
 [dep-status]: https://david-dm.org/yahoo/express-secure-handlebars
 [dep-badge]: https://img.shields.io/david/yahoo/express-secure-handlebars.svg?style=flat-square
 
-We enhance the [ExpressHandlebars](https://www.npmjs.com/package/express-handlebars) server-side view engine by **automatically** applying [Context-aware XSS output filters](https://www.npmjs.com/package/xss-filters) to better secure your web applications.
+We enhance the [express-handlebars](https://www.npmjs.com/package/express-handlebars) server-side view engine by leveraging the [secure-handlebars](https://www.npmjs.com/package/secure-handlebars) for defending against Cross-Site Scripting (XSS). Hence, web applications can be automatically secured by contextual output escaping.
 
-- **Immediate Benefits**: Our approach outperforms the [existing HTML escaping](http://handlebarsjs.com/#html-escaping) by applying precise filtering rules that are specific to different output contexts, and is thus *secure against more attack vectors* while *eliminating double encodings* altogether. Kindly refer to [xss-filters](https://www.npmjs.com/package/xss-filters) for details. 
+- **Immediate Benefits**: Our approach outperforms the [existing HTML escaping](http://handlebarsjs.com/#html-escaping) by applying precise filtering rules that are specific to different output contexts, and is thus *more secure against XSS vectors* while *eliminating double encodings* altogether.
 - **Least Adoption Effort**: The manual effort required is as easy as batch replacing `express-handlebars` with `express-secure-handlebars` (i.e., to update those `require()` calls as well as the dependency in your `package.json`). The nitty-gritties of filter choices and integrations are all automated!
+
+For more details, kindly refer to the introductions to [secure-handlebars](https://www.npmjs.com/package/secure-handlebars) and [xss-filters](https://www.npmjs.com/package/xss-filters).
 
 ## Quick Start
 
 ### Installation
-```
-$ npm install express-secure-handlebars --save
+```sh
+npm install express-secure-handlebars --save
 ```
 
 ### Usage
@@ -80,13 +83,18 @@ app.listen(3000);
 
 ## Development
 
+## Known Limitations & Issues
+Please refer to the [section](https://github.com/yahoo/secure-handlebars/blob/master/README.md#known-limitations--issues) documented in secure-handlebars.
+
+### Warnings and Workarounds
+Please refer to the [section](https://github.com/yahoo/secure-handlebars/blob/master/README.md#warnings-and-workarounds) documented in secure-handlebars.
+
+## How to test
 Apply your changes to files in [src/](./src), and then run the tests.
-```
-$ npm test
+```sh
+npm test
 ```
 
-### Build
-[![Build Status](https://travis-ci.org/yahoo/express-secure-handlebars.svg?branch=master)](https://travis-ci.org/yahoo/express-secure-handlebars)
 
 ## License
 
