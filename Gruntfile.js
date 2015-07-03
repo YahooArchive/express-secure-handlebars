@@ -26,8 +26,8 @@ module.exports = function(grunt) {
       }
     },
     clean: {
-      all: ['xunit.xml', 'artifacts', 'coverage', 'node_modules'],
-      buildResidues: ['xunit.xml', 'artifacts', 'coverage']
+      all: ['coverage', 'node_modules'],
+      buildResidues: ['coverage']
     }
   });
 

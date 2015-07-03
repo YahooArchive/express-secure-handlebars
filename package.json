@@ -1,6 +1,6 @@
 {
   "name": "express-secure-handlebars",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "licenses": [
     {
       "type": "BSD",
@@ -21,9 +21,13 @@
   "keywords": [
     "context",
     "parser",
-    "html5",
     "handlebars",
-    "express"
+    "express",
+    "xss",
+    "cross-site scripting",
+    "contextual escaping",
+    "output escaping",
+    "security"
   ],
   "scripts": {
     "hint": "grunt jshint",
@@ -34,18 +38,18 @@
   "dependencies": {
     "express-handlebars": "^2.0.1",
     "handlebars": "^3.0.3",
-    "secure-handlebars": "^1.0.0",
-    "xss-filters": "^1.2.0"
+    "secure-handlebars": "^1.1.0",
+    "xss-filters": "^1.2.2"
   },
   "devDependencies": {
-    "express": "^4.12.*",
-    "supertest": "^0.15.0",
     "expect.js": "^0.3.1",
+    "express": "^4.12.*",
     "grunt": "^0.4.5",
     "grunt-cli": "0.1.*",
     "grunt-contrib-clean": "^0.6.0",
     "grunt-contrib-jshint": "^0.11.0",
-    "grunt-mocha-istanbul": "^2.3.0"
+    "grunt-mocha-istanbul": "^2.3.0",
+    "supertest": "^0.15.0"
   },
   "main": "./src/express-secure-handlebars.js",
   "bugs": {
