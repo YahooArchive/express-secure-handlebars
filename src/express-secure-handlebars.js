@@ -25,6 +25,15 @@ function ExpressSecureHandlebars(config) {
 /* inheriting the express-handlebars */
 util.inherits(ExpressSecureHandlebars, expressHandlebars);
 
+/* override ExpressHandlebars.render() to expose filePath as compilerOptions */
+ExpressSecureHandlebars.prototype.render = function (filePath, context, options) {
+    // expose filePath as processingFile in compilerOptions for secure-handlebars
+    this.compilerOptions || (this.compilerOptions = {});
+    this.compilerOptions.processingFile = filePath;
+
+    return expressHandlebars.prototype.render.call(this, filePath, context, options);
+};
+
 /* exporting the same signature of express-handlebars */
 exports = module.exports  = exphbs;
 exports.create            = create;
