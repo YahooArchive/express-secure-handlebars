@@ -46,5 +46,22 @@ function exphbs(config) {
 }
 
 function create(config) {
-    return new ExpressSecureHandlebars(config);
+
+    /* passing the partialsDir to the secure-handlebars by using the config.compilerOptions */
+    config || (config = {});
+
+    return overrideEH(new ExpressSecureHandlebars(config));
+}
+
+function overrideEH(secureExpHbs) {
+    var r = secureExpHbs.render;
+
+    /* this function is the entry point of parent template file */
+    secureExpHbs.render = function (filePath, context, options) {
+        this.compilerOptions || (this.compilerOptions = {});
+        this.compilerOptions.processingFile = filePath;
+        return r.call(this, filePath, context, options);
+    };
+
+    return secureExpHbs;
 }
