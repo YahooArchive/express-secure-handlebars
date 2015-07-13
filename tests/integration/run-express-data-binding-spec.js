@@ -53,6 +53,16 @@ Authors: Nera Liu <neraliu@yahoo-inc.com>
                 });
         });
 
+        it("Express Secure Handlebars undefined data binding test", function(done) {
+            request(app)
+                .get('/undefined')
+                .expect(200)
+                .end(function(err, res) {
+                    expect(res.text).to.be.match(/<div><\/div>/);
+                    expect(res.text).to.be.match(/<input id=\ufffd>/);
+                    expect(res.status).to.be.equal(200);
+                    done();
+                });
+        });
     });
-
 }());
