@@ -5,6 +5,7 @@ var express = require('express'),
 
 var routes = require('./routes/index');
 var routesyd = require('./routes/yd');
+var routesundefined = require('./routes/undefined');
 
 app.engine('hbs', expressHbs({ extname:'hbs' }));
 app.set('views', path.join(__dirname, 'views'));
@@ -14,6 +15,7 @@ process.chdir(__dirname);
 
 app.use('/', routes);
 app.use('/yd', routesyd);
+app.use('/undefined', routesundefined);
 app.get('/ok', function(req, res){
     res.status(200).send('ok');
 });
