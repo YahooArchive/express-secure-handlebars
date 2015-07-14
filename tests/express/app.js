@@ -6,8 +6,13 @@ var express = require('express'),
 var routes = require('./routes/index');
 var routesyd = require('./routes/yd');
 var routesundefined = require('./routes/undefined');
+var routespartial = require('./routes/partial');
+var routeslooppartial = require('./routes/looppartial');
 
-app.engine('hbs', expressHbs({ extname:'hbs' }));
+app.expressSecureHandlebars = expressHbs.create({ partialsDir: __dirname + '/views/partials',
+                               extname:'hbs' });
+app.engine('hbs', app.expressSecureHandlebars.engine);
+
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
@@ -16,6 +21,8 @@ process.chdir(__dirname);
 app.use('/', routes);
 app.use('/yd', routesyd);
 app.use('/undefined', routesundefined);
+app.use('/partial', routespartial);
+app.use('/looppartial', routeslooppartial);
 app.get('/ok', function(req, res){
     res.status(200).send('ok');
 });

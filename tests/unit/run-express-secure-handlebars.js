@@ -26,7 +26,6 @@ Authors: Nera Liu <neraliu@yahoo-inc.com>
             expect(expressHandlebars.create).to.be.ok();
             expect(expressHandlebars.ExpressHandlebars).to.be.ok();
 
-
             // console.log(expressSecureHandlebars);
             expect(typeof expressSecureHandlebars).to.be.equal('function');
             expect(typeof expressSecureHandlebars.create).to.be.equal('function');
@@ -81,13 +80,14 @@ Authors: Nera Liu <neraliu@yahoo-inc.com>
         });
 
         it("handlebars getTemplate test", function() {
-            var templateFile = path.resolve("views/yd.hbs");
+            var templateFile = path.resolve("tests/express/views/yd.hbs");
             var expSecureHbs = expressSecureHandlebars.create();
             expSecureHbs.render(templateFile);
             expect(expSecureHbs.compilerOptions).to.be.ok();
-            expect(expSecureHbs.compilerOptions.processingFile).to.be.ok();
-            expect(expSecureHbs.compilerOptions.processingFile).to.be.match(/yd\.hbs/);
+            expect(expSecureHbs.compilerOptions.cph).to.be.ok();
+            expect(expSecureHbs.compilerOptions.cph.processingFile).to.be.ok();
+            expect(expSecureHbs.compilerOptions.cph.processingFile).to.be.equal(templateFile);
         });
-    });
 
+    });
 }());
