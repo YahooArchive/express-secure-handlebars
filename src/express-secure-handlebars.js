@@ -9,8 +9,12 @@ Authors: Nera Liu <neraliu@yahoo-inc.com>
 */
 /*jshint -W030 */
 var util = require("util"),
-    expressHandlebars = require('express-handlebars').ExpressHandlebars,
-    secureHandlebars = require('secure-handlebars');
+    ExpressHandlebars = require('express-handlebars').ExpressHandlebars,
+    secureHandlebars = require('secure-handlebars'),
+    assign = require('object.assign'),
+    Promise = require('bluebird'),
+    fs = Promise.promisifyAll(require("fs")),
+    glob = Promise.promisify(require('glob'));
 
 function ExpressSecureHandlebars(config) {
 
@@ -20,18 +24,63 @@ function ExpressSecureHandlebars(config) {
 
     /* calling super constructor */
     this.constructor.super_.call(this, config);
+
+    // compilerOptions is being used for passing params to context-parser-handlebars
+    this.compilerOptions || (this.compilerOptions = {});
+    this.compilerOptions.cph || (this.compilerOptions.cph = {});
+    this.compilerOptions.cph.rawPartialsCache = {};
+    this.compilerOptions.cph.processedPartialsCache = {};
+    this.compilerOptions.cph.compiledPartialsCache = {};
+    this.compilerOptions.cph.enablePartialCombine = false;
+
+    // create a slave instance of the Express Handlebars for caching partials
+    var expressSecureHandlebars = this;
+    this.slaveExpressHandlebars = new ExpressHandlebars(config);
+    var returnTemplate = function (template, options) {
+        return template;
+    };
+    this.slaveExpressHandlebars._compileTemplate = returnTemplate;
+    this.slaveExpressHandlebars._precompileTemplate = returnTemplate;
+    this.slaveExpressHandlebars.getPartials({}).then(function(rawPartialCache) {
+        expressSecureHandlebars.compilerOptions.cph.rawPartialsCache = rawPartialCache;
+        // disable the getPartials with partialsDir setting to empty array
+        expressSecureHandlebars.partialsDir = [];
+    });
 }
 
 /* inheriting the express-handlebars */
-util.inherits(ExpressSecureHandlebars, expressHandlebars);
+util.inherits(ExpressSecureHandlebars, ExpressHandlebars);
 
-/* override ExpressHandlebars.render() to expose filePath as compilerOptions */
+/* compiling the template into Handlebars template function */
+function compileTemplates(templates, precompiled) {
+    for (var name in templates) {
+        if (templates.hasOwnProperty(name) && !this.compilerOptions.cph.compiledPartialsCache[name]) {
+            this.compilerOptions.cph.compiledPartialsCache[name] = precompiled? this._precompileTemplate(templates[name], this.compilerOptions) 
+                : this._compileTemplate(templates[name], this.compilerOptions);
+        }
+    }
+}
+
+/* override ExpressHandlebars.render() */
 ExpressSecureHandlebars.prototype.render = function (filePath, context, options) {
-    // expose filePath as processingFile in compilerOptions for secure-handlebars
-    this.compilerOptions || (this.compilerOptions = {});
-    this.compilerOptions.processingFile = filePath;
+console.log("r:"+filePath);
+    options || (options = {});
 
-    return expressHandlebars.prototype.render.call(this, filePath, context, options);
+    // expose filePath as processingFile in compilerOptions for secure-handlebars
+    this.compilerOptions.cph.processingFile = filePath;
+
+    // master express-secure-handlebars
+    var expressSecureHandlebars = this;
+
+    // return the Promise from render()
+    return ExpressHandlebars.prototype.getTemplate.call(this, filePath, options).then(function(template) {
+        compileTemplates.call(expressSecureHandlebars, expressSecureHandlebars.compilerOptions.cph.processedPartialsCache, options.precompiled);
+        // options.partials may be set in renderView, we concat it.
+        options.partials || (options.partials = {});
+        options.partials = assign({}, options.partials, expressSecureHandlebars.compilerOptions.cph.compiledPartialsCache);
+    }).then(function() {
+        return ExpressHandlebars.prototype.render.call(expressSecureHandlebars, filePath, context, options);
+    });
 };
 
 /* exporting the same signature of express-handlebars */

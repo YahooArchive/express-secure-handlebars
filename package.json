@@ -36,8 +36,11 @@
     "test": "grunt test"
   },
   "dependencies": {
+    "bluebird": "^2.9.33",
     "express-handlebars": "^2.0.1",
+    "glob": "^5.0.13",
     "handlebars": "^3.0.3",
+    "object.assign": "^3.0.1",
     "secure-handlebars": "^1.1.1",
     "xss-filters": "^1.2.4"
   },
