@@ -38,6 +38,8 @@
   "dependencies": {
     "express-handlebars": "^2.0.1",
     "handlebars": "^3.0.3",
+    "object.assign": "^3.0.1",
+    "promise": "^7.0.3",
     "secure-handlebars": "^1.1.1",
     "xss-filters": "^1.2.4"
   },

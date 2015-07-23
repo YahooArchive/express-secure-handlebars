@@ -18,6 +18,8 @@ Authors: Nera Liu <neraliu@yahoo-inc.com>
 
     describe("Express Secure Handlebars test suite", function() {
 
+        this.timeout(5000);
+
         it("same signature test", function() {
             // console.log(expressHandlebars);
             expect(typeof expressHandlebars).to.be.equal('function');
@@ -25,7 +27,6 @@ Authors: Nera Liu <neraliu@yahoo-inc.com>
             expect(typeof expressHandlebars.ExpressHandlebars).to.be.equal('function');
             expect(expressHandlebars.create).to.be.ok();
             expect(expressHandlebars.ExpressHandlebars).to.be.ok();
-
 
             // console.log(expressSecureHandlebars);
             expect(typeof expressSecureHandlebars).to.be.equal('function');
@@ -80,14 +81,24 @@ Authors: Nera Liu <neraliu@yahoo-inc.com>
             expect(t1(data)).not.to.be.equal(t2(data));
         });
 
-        it("handlebars getTemplate test", function() {
-            var templateFile = path.resolve("views/yd.hbs");
-            var expSecureHbs = expressSecureHandlebars.create();
-            expSecureHbs.render(templateFile);
-            expect(expSecureHbs.compilerOptions).to.be.ok();
-            expect(expSecureHbs.compilerOptions.processingFile).to.be.ok();
-            expect(expSecureHbs.compilerOptions.processingFile).to.be.match(/yd\.hbs/);
-        });
-    });
+        it("handlebars render test", function(done) {
 
+            var filePath = path.resolve('../express/views/yd.hbs');
+            var expSecureHbs = expressSecureHandlebars.create();
+
+            expect(expSecureHbs.compilerOptions).to.be.ok();
+            expect(expSecureHbs.compilerOptions.shbsPartialsCache).to.be.ok();
+            
+            expSecureHbs.render(filePath, {input: '<script>alert(1)</script>'}).then(function(output){
+                if (output === '<div>&lt;script>alert(1)&lt;/script></div>\n' && 
+                    expSecureHbs.compilerOptions.processingFile === filePath) {
+                    done();
+                }
+
+            });
+
+
+        });
+
+    });
 }());
