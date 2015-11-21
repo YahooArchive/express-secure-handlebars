@@ -1,6 +1,6 @@
 {
   "name": "express-secure-handlebars",
-  "version": "2.0.4",
+  "version": "2.1.0",
   "licenses": [
     {
       "type": "BSD",
@@ -51,6 +51,8 @@
     "grunt-contrib-clean": "^0.6.0",
     "grunt-contrib-jshint": "^0.11.0",
     "grunt-mocha-istanbul": "^2.3.0",
+    "mocha": "^2.3.4",
+    "istanbul": "^0.4.0",
     "supertest": "^0.15.0"
   },
   "main": "./src/express-secure-handlebars.js",
