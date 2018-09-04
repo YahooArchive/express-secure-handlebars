@@ -1,3 +1,5 @@
+**Note:** This library has known security vulnerabilities, use at your own risk!
+
 Express with Secure Handlebars
 -------
 [![npm version][npm-badge]][npm]
