@@ -1,0 +1,48 @@
+{
+  "name": "express-secure-handlebars",
+  "version": "2.1.1",
+  "dependencies": {
+    "handlebars": {
+      "version": "3.0.3"
+    },
+    "object.assign": {
+      "version": "4.0.3"
+    },
+    "promise": {
+      "version": "7.0.3"
+    },
+    "secure-handlebars": {
+      "version": "1.2.1"
+    },
+    "xss-filters": {
+      "version": "1.2.7"
+    },
+    "express-handlebars": {
+      "version": "2.0.1",
+      "from": "express-handlebars@>=2.0.0 <3.0.0",
+      "resolved": "https://registry.npmjs.org/express-handlebars/-/express-handlebars-2.0.1.tgz",
+      "dependencies": {
+        "glob": {
+          "version": "5.0.15",
+          "from": "glob@>=5.0.0 <6.0.0"
+        },
+        "graceful-fs": {
+          "version": "4.1.6",
+          "from": "graceful-fs@4.1.6"
+        },
+        "handlebars": {
+          "version": "3.0.3",
+          "from": "handlebars@>=3.0.0 <4.0.0"
+        },
+        "object.assign": {
+          "version": "1.1.1",
+          "from": "object.assign@>=1.1.1 <2.0.0"
+        },
+        "promise": {
+          "version": "6.1.0",
+          "from": "promise@>=6.0.0 <7.0.0"
+        }
+      }
+    }
+  }
+}
